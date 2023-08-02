@@ -65,12 +65,11 @@ modules:
         url: https://github.com/ArmageddonGames/ZQuestClassic/releases/download/nightly-2023-07-19/nightly-2023-07-19-linux.tar.gz
         sha256: bedfea106f72855ab5d1f832547440fdaf1356ba07a6f4533a30e4911371e2ee
         only-arches: [x86_64]
-        # TODO: enable for next alpha.
-        # x-checker-data:
-        #   type: json
-        #   url: https://api.github.com/repos/ArmageddonGames/ZQuestClassic/releases/latest
-        #   version-query: .tag_name
-        #   url-query: .assets[] | select(.name|endswith("linux.tar.gz")) | .browser_download_url
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/ArmageddonGames/ZQuestClassic/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name|endswith("linux.tar.gz")) | .browser_download_url
       - type: script
         dest-filename: entry.sh
         commands:
