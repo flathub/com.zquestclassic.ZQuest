@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>ZQuest Classic</name>
-  <summary>ZQuest Classic is a game engine for creating games similar to the popular classic adventure game.</summary>
+  <summary>A game engine for creating games similar to the popular classic adventure game</summary>
   <description>
     <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines, due to the number of features that are available without the need for any form of programming knowledge.</p>
   </description>
