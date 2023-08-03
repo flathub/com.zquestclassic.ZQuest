@@ -10,6 +10,9 @@
   </description>
   <url type="homepage">https://www.zeldaclassic.com</url>
   <url type="bugtracker">https://github.com/ArmageddonGames/ZQuestClassic/issues</url>
+  <categories>
+		<category>Game</category>
+	</categories>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">mild</content_attribute>
   </content_rating>
