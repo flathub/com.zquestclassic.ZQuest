@@ -62,8 +62,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/ArmageddonGames/ZQuestClassic/releases/download/2.55-alpha-117/2.55-alpha-117-linux.tar.gz
-        sha256: e4910bb6e27f0a815e3a42e774d8c87b6d01cbacffd1fc04f4b18c3a20fc0e33
+        url: https://github.com/ArmageddonGames/ZQuestClassic/releases/download/2.55-alpha-118/2.55-alpha-118-linux.tar.gz
+        sha256: de457c65c40f7b3f5e3499ca9a2137ab35a9c47343404b44ef6011a76d635aed
         only-arches: [x86_64]
         x-checker-data:
           type: json
