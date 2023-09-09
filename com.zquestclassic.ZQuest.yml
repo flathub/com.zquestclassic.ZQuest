@@ -62,12 +62,12 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/ArmageddonGames/ZQuestClassic/releases/download/2.55-alpha-118/2.55-alpha-118-linux.tar.gz
+        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/2.55-alpha-118/2.55-alpha-118-linux.tar.gz
         sha256: de457c65c40f7b3f5e3499ca9a2137ab35a9c47343404b44ef6011a76d635aed
         only-arches: [x86_64]
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/ArmageddonGames/ZQuestClassic/releases/latest
+          url: https://api.github.com/repos/ZQuestClassic/ZQuestClassic/releases/latest
           version-query: .tag_name
           url-query: .assets[] | select(.name|endswith("linux.tar.gz")) | .browser_download_url
       - type: script
