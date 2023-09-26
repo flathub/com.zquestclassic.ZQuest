@@ -54,6 +54,8 @@ modules:
           rm com.zquestclassic.ZQuest-$s.png
         done
 
+        rm zupdater
+
         find . -name "*.so*" -exec mv {} /app/bin/ \;
         find . -perm /a+x -type f -exec mv {} /app/bin/ \;
         rm com.zquestclassic.*
@@ -83,7 +85,13 @@ modules:
             cp -r /app/resources/* "$DATA_DIR/ZQuest Classic"
           - |
             cd "$DATA_DIR/ZQuest Classic"
-            zlauncher
+            ln -sf /app/bin/zlauncher zlauncher
+            ln -sf /app/bin/zquest zquest
+            ln -sf /app/bin/zplayer zplayer
+            ln -sf /app/bin/zscript zscript
+          - |
+            cd "$DATA_DIR/ZQuest Classic"
+            ./zlauncher
       - type: file
         path: com.zquestclassic.ZQuest.metainfo.xml
       - type: file
