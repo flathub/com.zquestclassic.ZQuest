@@ -64,8 +64,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/nightly-2023-09-26-2/nightly-2023-09-26-2-linux.tar.gz
-        sha256: 59e9a3ef776a9cedaa9d7a6443dc0d5a4556a0df69c0502068c1c4f782adb8df
+        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/2.55-alpha-119/2.55-alpha-119-linux.tar.gz
+        sha256: 815dbc75344e70d9d345c00d9f1bc8d0d0b20be7cacb5759526719debfa5a3e4
         only-arches: [x86_64]
         x-checker-data:
           type: json
