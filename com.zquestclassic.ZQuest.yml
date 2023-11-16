@@ -86,7 +86,7 @@ modules:
           - |
             cd "$DATA_DIR/ZQuest Classic"
             ln -sf /app/bin/zlauncher zlauncher
-            ln -sf /app/bin/zquest zquest
+            ln -sf /app/bin/zeditor zeditor
             ln -sf /app/bin/zplayer zplayer
             ln -sf /app/bin/zscript zscript
           - |
