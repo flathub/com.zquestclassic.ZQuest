@@ -8,6 +8,7 @@
   <description>
     <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines, due to the number of features that are available without the need for any form of programming knowledge.</p>
   </description>
+  <launchable type="desktop-id">com.zquestclassic.ZQuest.desktop</launchable>
 
   <url type="homepage">https://zquestclassic.com</url>
   <url type="bugtracker">https://github.com/ZQuestClassic/ZQuestClassic/issues</url>
