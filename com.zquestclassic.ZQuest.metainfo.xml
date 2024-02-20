@@ -28,6 +28,9 @@
       <url>https://zquestclassic.com/releases/2.55-alpha-120/</url>
     </release>
     <release version="2.55-alpha-119" date="2023-10-08"/>
+    <release version="nightly-2023-09-26-2" date="2023-09-26">
+      <url>https://zquestclassic.com/releases/nightly-2023-09-26-2/</url>
+    </release>
     <release version="2.55-alpha-118" date="2023-09-09">
       <url>https://zquestclassic.com/releases/2.55-alpha-118/</url>
     </release>
@@ -36,9 +39,6 @@
     </release>
     <release version="2.55-alpha-116" date="2023-08-02">
       <url>https://zquestclassic.com/releases/2.55-alpha-116/</url>
-    </release>
-    <release version="nightly-2023-09-26-2" date="2023-09-26">
-      <url>https://zquestclassic.com/releases/nightly-2023-09-26-2/</url>
     </release>
     <release date="2023-07-19" version="nightly-2023-07-19">
       <url>https://zquestclassic.com/releases/nightly-2023-07-19</url>
