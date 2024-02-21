@@ -8,6 +8,10 @@
   <description>
     <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines, due to the number of features that are available without the need for any form of programming knowledge.</p>
   </description>
+  <launchable type="desktop-id">com.zquestclassic.ZQuest.desktop</launchable>
+  <developer id="com.zquestclassic">
+    <name>ZQuest Classic</name>
+  </developer>
 
   <url type="homepage">https://zquestclassic.com</url>
   <url type="bugtracker">https://github.com/ZQuestClassic/ZQuestClassic/issues</url>
@@ -33,12 +37,6 @@
     </release>
     <release version="2.55-alpha-116" date="2023-08-02">
       <url>https://zquestclassic.com/releases/2.55-alpha-116/</url>
-    </release>
-    <release version="nightly-2023-09-26-2" date="2023-09-26">
-      <url>https://zquestclassic.com/releases/nightly-2023-09-26-2/</url>
-    </release>
-    <release date="2023-07-19" version="nightly-2023-07-19">
-      <url>https://zquestclassic.com/releases/nightly-2023-07-19</url>
     </release>
   </releases>
   <screenshots>
