@@ -64,8 +64,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/2.55-alpha-120/2.55-alpha-120-linux.tar.gz
-        sha256: daf007f796142a8a1e0b843a5568275128adee37953f8787cdc67653d511b520
+        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/2.55.0/2.55.0-linux.tar.gz
+        sha256: 5f24eef2489f2b3944a84b77f4ce2444e0068b0049eef15530d38b1e55c6167a
         only-arches: [x86_64]
         x-checker-data:
           type: json
