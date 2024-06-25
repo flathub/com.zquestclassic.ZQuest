@@ -2,46 +2,103 @@ app-id: com.zquestclassic.ZQuest
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm17
 finish-args:
   - --share=network
   - --share=ipc
-  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
   - --socket=pulseaudio
   - --filesystem=xdg-download
   - --filesystem=xdg-documents
   # Needed for game controllers.
   - --device=all
 command: entry.sh
+cleanup:
+  - /bin/*png*
 modules:
-  - name: libglu
-    buildsystem: meson
-    cleanup:
-      - /include
-      - /lib/*.a
-      - /lib/*.la
-      - /lib/pkgconfig
-    sources:
-      - type: archive
-        url: https://ftp.osuosl.org/pub/blfs/conglomeration/glu/glu-9.0.2.tar.xz
-        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
-
-  - name: libjpeg # with libjpeg.so.8
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_SKIP_RPATH:BOOL=YES
-      - -DENABLE_STATIC:BOOL=NO
-      - -DWITH_JPEG8:BOOL=YES
-      - -DCMAKE_INSTALL_LIBDIR=/app/lib # uses lib64 by default
-    cleanup:
-      - /include
-      - /lib/cmake
-      - /lib/pkgconfig
-    sources:
-      - type: archive
-        url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/2.1.3.tar.gz
-        sha256: dbda0c685942aa3ea908496592491e5ec8160d2cf1ec9d5fd5470e50768e7859
-
   - name: zquest
+    buildsystem: cmake
+    builddir: true
+    build-options:
+      append-path: /usr/lib/sdk/llvm17/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm17/lib
+    config-opts:
+      - -D CMAKE_C_COMPILER=clang
+      - -D CMAKE_CXX_COMPILER=clang++
+      # - -D ZC_OFFICIAL=1
+      # - -D ZC_VERSION=2.55.4
+      - -D RELEASE_TAG=2.55.4
+      - -D RELEASE_CHANNEL=2.55
+      - -D REPO=ZQuestClassic/ZQuestClassic
+      - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
+      - -D FETCHCONTENT_SOURCE_DIR_GME_EXTERNAL=../deps/gme
+      - -D FETCHCONTENT_SOURCE_DIR_DUMB_EXTERNAL=../deps/dumb
+      # - -D FETCHCONTENT_SOURCE_DIR_ASIO=../deps/asio
+      # - -D FETCHCONTENT_SOURCE_DIR_WEBSOCKETPP=../deps/websocketpp
+      - -D FETCHCONTENT_SOURCE_DIR_ASMJIT=../deps/asmjit
+      - -D FETCHCONTENT_SOURCE_DIR_NATIVEFILEDIALOG=../deps/nfd
+      - -D FETCHCONTENT_SOURCE_DIR_JSON=../deps/json
+      # - -D FETCHCONTENT_SOURCE_DIR_POOLSTL=../deps/poolSTL
+      - -D FETCHCONTENT_SOURCE_DIR_ZLIB=../deps/zlib
+      - -D FETCHCONTENT_SOURCE_DIR_PNG=../deps/libpng
+    sources:
+      - type: git
+        url: https://github.com/ZQuestClassic/ZQuestClassic
+        tag: d5b161e332405683fa2e140defea62cc9e3719f6
+        # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
+        disable-shallow-clone: true
+      - type: git
+        url: https://github.com/connorjclark/allegro5
+        tag: fe5332357416aa0b5d9ed69b0206a58ceea7cded
+        dest: deps/allegro5
+      - type: git
+        url: https://github.com/libgme/game-music-emu
+        tag: 6b676192d98302e698ac78fe3c00833eae6a74e5
+        dest: deps/gme
+      - type: git
+        url: https://github.com/kode54/dumb
+        tag: 396caa4d31859045ccb5ef943fd430ca4026cce8
+        dest: deps/dumb
+      - type: shell
+        commands:
+          - cd deps/dumb && git apply ../../third_party/aldumb.patch
+      # - type: git
+      #   url: https://github.com/chriskohlhoff/asio
+      #   tag: ed5db1b50136bace796062c1a6eab0df9a74f8fa
+      #   dest: deps/asio
+      # - type: git
+      #   url: https://github.com/zaphoyd/websocketpp
+      #   tag: b9aeec6eaf3d5610503439b4fae3581d9aff08e8
+      #   dest: deps/websocketpp
+      - type: git
+        url: https://github.com/connorjclark/asmjit
+        tag: 6d153ad8e13984841c2c642c0fa11e60f41e54dc
+        dest: deps/asmjit
+      - type: git
+        url: https://github.com/btzy/nativefiledialog-extended
+        tag: 17b6e8ce219c0677f94b63636abb9296b28841ca
+        dest: deps/nfd
+      # - type: git
+      #   url: https://github.com/alugowski/poolSTL
+      #   tag: 26d95b90aea7c36732a2df50df1c6fa26c96f93e
+      #   dest: deps/poolSTL
+      - type: git
+        url: https://github.com/Mizux/zlib
+        tag: 19d7d6b32ee3af4ed4bdec415f42f518c93b5025
+        dest: deps/zlib
+      - type: git
+        url: https://github.com/glennrp/libpng
+        tag: v1.6.38
+        commit: 0a158f3506502dfa23edfc42790dfaed82efba17
+        dest: deps/libpng
+      - type: archive
+        url: https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
+        sha256: d6c65aca6b1ed68e7a182f4757257b107ae403032760ed6ef121c9d55e81757d
+        dest: deps/json
+
+  - name: files
     buildsystem: simple
     build-commands:
       - |
@@ -54,44 +111,33 @@ modules:
           rm com.zquestclassic.ZQuest-$s.png
         done
 
-        rm zupdater
+        mv entry.sh /app/bin
 
-        find . -name "*.so*" -exec mv {} /app/bin/ \;
-        find . -perm /a+x -type f -exec mv {} /app/bin/ \;
-        rm com.zquestclassic.*
-        mkdir /app/resources/
-        mv * /app/resources/
+        rm -rf /app/quests
+        mv quests /app/quests
 
     sources:
-      - type: archive
-        url: https://github.com/ZQuestClassic/ZQuestClassic/releases/download/2.55.3/2.55.3-linux.tar.gz
-        sha256: 1691e87d34c3d7b7d87b41a9dd036834bdd3e2b15bcdbdfae5841fc55de23d16
-        only-arches: [x86_64]
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/ZQuestClassic/ZQuestClassic/releases/latest
-          version-query: .tag_name
-          url-query: .assets[] | select(.name|endswith("linux.tar.gz")) | .browser_download_url
       - type: script
         dest-filename: entry.sh
         commands:
           # TODO: remove when we have proper support for user data dirs.
-          # For now, just copy all the base resources to the user data dir,
+          # For now, just symlink all the base resources to the user data dir,
           # and run the program from there.
           - |
-            set -ex
+            set -e
             DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
             mkdir -p "$DATA_DIR/ZQuest Classic"
-            cp -r /app/resources/* "$DATA_DIR/ZQuest Classic"
+            ln -sf /app/* "$DATA_DIR/ZQuest Classic"
+          # nvidia cards are not working within flatpak, at least for me
+          # on Linux Mint 21.3. So set LIBGL_ALWAYS_SOFTWARE to workaround.
+          # See https://github.com/alemart/opensurge/issues/116
           - |
             cd "$DATA_DIR/ZQuest Classic"
-            ln -sf /app/bin/zlauncher zlauncher
-            ln -sf /app/bin/zeditor zeditor
-            ln -sf /app/bin/zplayer zplayer
-            ln -sf /app/bin/zscript zscript
-          - |
-            cd "$DATA_DIR/ZQuest Classic"
-            ./zlauncher
+            if lspci | grep VGA | grep NVIDIA; then
+              echo "NVIDIA card detected - setting LIBGL_ALWAYS_SOFTWARE to be safe"
+              export LIBGL_ALWAYS_SOFTWARE=1
+            fi
+            zlauncher
       - type: file
         path: com.zquestclassic.ZQuest.metainfo.xml
       - type: file
@@ -110,3 +156,17 @@ modules:
         path: icons/com.zquestclassic.ZQuest-256.png
       - type: file
         path: icons/com.zquestclassic.ZQuest-512.png
+
+      # These files are tracked with Git LFS, which flatpak-builder does not support, so download them explicitly.
+      - type: file
+        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/the_deep.qst
+        dest: quests
+        sha256: e37f20e41b90586575097214e01b96aa68c4b5c6b7eadfde781157311a640074
+      - type: file
+        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/Z1 Recreations/classic_1st.qst
+        dest: quests/Z1 Recreations
+        sha256: 3a8428823ba92137d596b73c4c8289df8ae1ad92f306dc2ff3f080395db1074c
+      - type: file
+        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/Z1 Recreations/classic_2nd.qst
+        dest: quests/Z1 Recreations
+        sha256: fbcd009c696acb80c30fbe856f84f8cb5b0604f6e1efc9e4dc0738d26e9c86af
