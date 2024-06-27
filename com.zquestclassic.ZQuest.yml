@@ -127,6 +127,15 @@ modules:
             set -e
             DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
             mkdir -p "$DATA_DIR/ZQuest Classic"
+
+            if [ "$(stat -c %h -- "$DATA_DIR/ZQuest Classic/assets")" -gt 1 ]; then
+              mv "$DATA_DIR/ZQuest Classic" "$DATA_DIR/ZQuest Classic (backup)"
+              mkdir -p "$DATA_DIR/ZQuest Classic"
+              mv "$DATA_DIR/ZQuest Classic (backup)" "$DATA_DIR/ZQuest Classic/OLD (backup)"
+              echo "Resources from old installation detected and moved to: $DATA_DIR/ZQuest Classic/OLD (backup)"
+              echo "If you had nothing important in there, you may delete it"
+            fi
+
             ln -sf /app/* "$DATA_DIR/ZQuest Classic"
           # nvidia cards are not working within flatpak, at least for me
           # on Linux Mint 21.3. So set LIBGL_ALWAYS_SOFTWARE to workaround.
