@@ -143,8 +143,14 @@ modules:
           - |
             cd "$DATA_DIR/ZQuest Classic"
             if lspci | grep VGA | grep NVIDIA; then
-              echo "NVIDIA card detected - setting LIBGL_ALWAYS_SOFTWARE to be safe"
-              export LIBGL_ALWAYS_SOFTWARE=1
+              echo "-----------------------"
+              echo "NVIDIA card detected - if no window opens, be sure you are using the official"
+              echo "drivers from NVIDIA - use the Driver Manager https://itsfoss.com/nvidia-linux-mint/ (Linux Mint) or the"
+              echo "equivalent for your operating system."
+              echo
+              echo "As a last resort, set the LIBGL_ALWAYS_SOFTWARE=1 environment variable (will result in high CPU)"
+              echo "-----------------------"
+              # export LIBGL_ALWAYS_SOFTWARE=1
             fi
             zlauncher
       - type: file
