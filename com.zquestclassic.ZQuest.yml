@@ -17,7 +17,25 @@ finish-args:
 command: entry.sh
 cleanup:
   - /bin/*png*
+
 modules:
+  - name: libdumb
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -D CMAKE_C_COMPILER=clang
+      - -D CMAKE_CXX_COMPILER=clang++
+      - -D CMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -D BUILD_EXAMPLES=OFF
+      - -D BUILD_ALLEGRO4=OFF
+    build-options:
+      append-path: /usr/lib/sdk/llvm17/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm17/lib
+    sources:
+      - type: git
+        url: https://github.com/kode54/dumb
+        tag: 396caa4d31859045ccb5ef943fd430ca4026cce8
+
   - name: zquest
     buildsystem: cmake
     builddir: true
@@ -28,42 +46,35 @@ modules:
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
-      # - -D ZC_VERSION=2.55.4
-      - -D RELEASE_TAG=2.55.4
+      # - -D ZC_VERSION=2.55.6
+      - -D RELEASE_TAG=2.55.6
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
       - -D FETCHCONTENT_SOURCE_DIR_GME_EXTERNAL=../deps/gme
-      - -D FETCHCONTENT_SOURCE_DIR_DUMB_EXTERNAL=../deps/dumb
       # - -D FETCHCONTENT_SOURCE_DIR_ASIO=../deps/asio
       # - -D FETCHCONTENT_SOURCE_DIR_WEBSOCKETPP=../deps/websocketpp
       - -D FETCHCONTENT_SOURCE_DIR_ASMJIT=../deps/asmjit
       - -D FETCHCONTENT_SOURCE_DIR_NATIVEFILEDIALOG=../deps/nfd
       - -D FETCHCONTENT_SOURCE_DIR_JSON=../deps/json
-      # - -D FETCHCONTENT_SOURCE_DIR_POOLSTL=../deps/poolSTL
       - -D FETCHCONTENT_SOURCE_DIR_ZLIB=../deps/zlib
       - -D FETCHCONTENT_SOURCE_DIR_PNG=../deps/libpng
+      - -D FETCHCONTENT_SOURCE_DIR_STDUUID=../deps/stduuid
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        tag: d5b161e332405683fa2e140defea62cc9e3719f6
+        commit: 4dc458fd694d6aeeb9f08371a6659585227ac366
+        tag: 2.55.6
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
         url: https://github.com/connorjclark/allegro5
-        tag: fe5332357416aa0b5d9ed69b0206a58ceea7cded
+        tag: 97c84670907b2547f742924d571f2c617d557ed0
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
-        tag: 6b676192d98302e698ac78fe3c00833eae6a74e5
+        tag: 05a2aa29e8eae29316804fdd28ceaa96c74a1531
         dest: deps/gme
-      - type: git
-        url: https://github.com/kode54/dumb
-        tag: 396caa4d31859045ccb5ef943fd430ca4026cce8
-        dest: deps/dumb
-      - type: shell
-        commands:
-          - cd deps/dumb && git apply ../../third_party/aldumb.patch
       # - type: git
       #   url: https://github.com/chriskohlhoff/asio
       #   tag: ed5db1b50136bace796062c1a6eab0df9a74f8fa
@@ -80,10 +91,6 @@ modules:
         url: https://github.com/btzy/nativefiledialog-extended
         tag: 17b6e8ce219c0677f94b63636abb9296b28841ca
         dest: deps/nfd
-      # - type: git
-      #   url: https://github.com/alugowski/poolSTL
-      #   tag: 26d95b90aea7c36732a2df50df1c6fa26c96f93e
-      #   dest: deps/poolSTL
       - type: git
         url: https://github.com/Mizux/zlib
         tag: 19d7d6b32ee3af4ed4bdec415f42f518c93b5025
@@ -93,6 +100,13 @@ modules:
         tag: v1.6.38
         commit: 0a158f3506502dfa23edfc42790dfaed82efba17
         dest: deps/libpng
+      - type: git
+        url: https://github.com/mariusbancila/stduuid
+        tag: 3afe7193facd5d674de709fccc44d5055e144d7a
+        dest: deps/stduuid
+      - type: shell
+        commands:
+          - cd deps/stduuid && git apply ../../third_party/stduuid.patch
       - type: archive
         url: https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
         sha256: d6c65aca6b1ed68e7a182f4757257b107ae403032760ed6ef121c9d55e81757d
