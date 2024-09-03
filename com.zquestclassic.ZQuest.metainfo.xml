@@ -24,6 +24,7 @@
     <content_attribute id="violence-cartoon">mild</content_attribute>
   </content_rating>
   <releases>
+    <release version="2.55.6" date="2024-09-01"/>
     <release version="2.55.4" date="2024-06-26"/>
     <release version="2.55.3" date="2024-05-16"/>
     <release version="2.55.2" date="2024-04-22"/>
@@ -46,16 +47,20 @@
   </releases>
   <screenshots>
     <screenshot type="default">
-      <image>https://www.zeldaclassic.com/wp-content/uploads/resources/dgn.gif</image>
-      <caption>Ingame view</caption>
+      <image>https://zquestclassic.com/img/editor.png</image>
+      <caption>Editor screenshot (Cambria tileset by Shane and Matthew)</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://www.zeldaclassic.com/wp-content/uploads/resources/unoff01ss01.gif</image>
-      <caption>Ingame view</caption>
+      <image>https://zquestclassic.com/img/sotw-785-joel.png</image>
+      <caption>Game screenshot (designed by Joel for SotW 785)</caption>
     </screenshot>
     <screenshot type="default">
-      <image>https://www.zeldaclassic.com/wp-content/uploads/resources/eckla01ss01.gif</image>
-      <caption>Ingame view</caption>
+      <image>https://zquestclassic.com/img/sotw-778-twilight-knight.png</image>
+      <caption>Game screenshot (designed by Twilight Knight for SotW 778)</caption>
+    </screenshot>
+    <screenshot type="default">
+      <image>https://zquestclassic.com/img/sotw-793-architect-abdiel.png</image>
+      <caption>Game screenshot (designed by Architect Abdiel for SotW 793)</caption>
     </screenshot>
   </screenshots>
 </component>
