@@ -46,8 +46,8 @@ modules:
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
-      # - -D ZC_VERSION=2.55.6
-      - -D RELEASE_TAG=2.55.6
+      # - -D ZC_VERSION=2.55.8
+      - -D RELEASE_TAG=2.55.8
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
@@ -63,8 +63,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 4dc458fd694d6aeeb9f08371a6659585227ac366
-        tag: 2.55.6
+        commit: 60444bd69a04a3808d28904c5a0b76636f57165b
+        tag: 2.55.8
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
@@ -127,35 +127,52 @@ modules:
 
         mv entry.sh /app/bin
 
-        rm -rf /app/quests
-        mv quests /app/quests
-
     sources:
       - type: script
         dest-filename: entry.sh
         commands:
-          # TODO: remove when we have proper support for user data dirs.
-          # For now, just symlink all the base resources to the user data dir,
-          # and run the program from there.
+          # Copy all app resources to user's data directory, symlink the bin folder,
+          # and execute the launcher from there.
           - |
             set -e
-            DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
-            mkdir -p "$DATA_DIR/ZQuest Classic"
+            DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/ZQuest Classic"
+            mkdir -p "$DATA_DIR"
+            echo "Using data directory: $DATA_DIR"
 
-            if [ "$(stat -c %h -- "$DATA_DIR/ZQuest Classic/assets")" -gt 1 ]; then
-              mv "$DATA_DIR/ZQuest Classic" "$DATA_DIR/ZQuest Classic (backup)"
-              mkdir -p "$DATA_DIR/ZQuest Classic"
-              mv "$DATA_DIR/ZQuest Classic (backup)" "$DATA_DIR/ZQuest Classic/OLD (backup)"
-              echo "Resources from old installation detected and moved to: $DATA_DIR/ZQuest Classic/OLD (backup)"
-              echo "If you had nothing important in there, you may delete it"
-            fi
+            # Remove old symlinks from previous implementation.
+            find "$DATA_DIR" -maxdepth 1 -type l -not -path "$DATA_DIR/bin" | while read f; do
+              echo readlink "$f"
+              if readlink "$f" | grep -q /app; then
+                mkdir -p "$DATA_DIR/old_links_can_delete_folder"
+                mv "$f" "$DATA_DIR/old_links_can_delete_folder"
+              fi
+            done
 
-            ln -sf /app/* "$DATA_DIR/ZQuest Classic"
+            python <<EOF
+
+            from pathlib import Path
+            import distutils
+
+            app_dir = Path('/app')
+            data_dir = Path('$DATA_DIR')
+
+            for path in app_dir.rglob('*'):
+              if '/app/bin' in str(path) or path.name == '.ref' or not path.is_file():
+                continue
+
+              dest = data_dir / path.relative_to(app_dir)
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              dest, copied = distutils.file_util.copy_file(path, dest, update=1)
+              if copied:
+                print(f'copied: {dest}')
+
+            EOF
+
           # nvidia cards are not working within flatpak, at least for me
           # on Linux Mint 21.3. So set LIBGL_ALWAYS_SOFTWARE to workaround.
           # See https://github.com/alemart/opensurge/issues/116
           - |
-            cd "$DATA_DIR/ZQuest Classic"
+            cd "$DATA_DIR"
             if lspci | grep VGA | grep NVIDIA; then
               echo "-----------------------"
               echo "NVIDIA card detected - if no window opens, be sure you are using the official"
@@ -185,17 +202,3 @@ modules:
         path: icons/com.zquestclassic.ZQuest-256.png
       - type: file
         path: icons/com.zquestclassic.ZQuest-512.png
-
-      # These files are tracked with Git LFS, which flatpak-builder does not support, so download them explicitly.
-      - type: file
-        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/the_deep.qst
-        dest: quests
-        sha256: e37f20e41b90586575097214e01b96aa68c4b5c6b7eadfde781157311a640074
-      - type: file
-        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/Z1 Recreations/classic_1st.qst
-        dest: quests/Z1 Recreations
-        sha256: 3a8428823ba92137d596b73c4c8289df8ae1ad92f306dc2ff3f080395db1074c
-      - type: file
-        url: https://github.com/ZQuestClassic/ZQuestClassic/raw/2.55.3/resources/quests/Z1 Recreations/classic_2nd.qst
-        dest: quests/Z1 Recreations
-        sha256: fbcd009c696acb80c30fbe856f84f8cb5b0604f6e1efc9e4dc0738d26e9c86af
