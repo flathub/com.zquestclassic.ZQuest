@@ -46,8 +46,8 @@ modules:
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
-      # - -D ZC_VERSION=2.55.9
-      - -D RELEASE_TAG=2.55.9
+      # - -D ZC_VERSION=2.55.10
+      - -D RELEASE_TAG=2.55.10
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
@@ -63,8 +63,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 5c03a9d45f666488f93a4d7b72027a7be8baea83
-        tag: 2.55.9
+        commit: 94da6b94725a10f0f768681fb3e9097abb03fc5b
+        tag: 2.55.10
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
@@ -92,13 +92,14 @@ modules:
         tag: 17b6e8ce219c0677f94b63636abb9296b28841ca
         dest: deps/nfd
       - type: git
-        url: https://github.com/Mizux/zlib
-        tag: 19d7d6b32ee3af4ed4bdec415f42f518c93b5025
+        url: https://github.com/madler/zlib
+        tag: v1.3.1
+        commit: 51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf
         dest: deps/zlib
       - type: git
         url: https://github.com/glennrp/libpng
-        tag: v1.6.38
-        commit: 0a158f3506502dfa23edfc42790dfaed82efba17
+        tag: v1.6.47
+        commit: 872555f4ba910252783af1507f9e7fe1653be252
         dest: deps/libpng
       - type: git
         url: https://github.com/mariusbancila/stduuid
