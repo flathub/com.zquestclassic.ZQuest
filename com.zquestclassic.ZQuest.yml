@@ -57,8 +57,8 @@ modules:
       - -D FETCHCONTENT_SOURCE_DIR_ASMJIT=../deps/asmjit
       - -D FETCHCONTENT_SOURCE_DIR_NATIVEFILEDIALOG=../deps/nfd
       - -D FETCHCONTENT_SOURCE_DIR_JSON=../deps/json
-      - -D FETCHCONTENT_SOURCE_DIR_ZLIB=../deps/zlib
-      - -D FETCHCONTENT_SOURCE_DIR_PNG=../deps/libpng
+      - -D WANT_VENDORED_ZLIB
+      - -D WANT_VENDORED_LIBPNG
       - -D FETCHCONTENT_SOURCE_DIR_STDUUID=../deps/stduuid
     sources:
       - type: git
