@@ -91,16 +91,16 @@ modules:
         url: https://github.com/btzy/nativefiledialog-extended
         tag: 17b6e8ce219c0677f94b63636abb9296b28841ca
         dest: deps/nfd
-      - type: git
-        url: https://github.com/madler/zlib
-        tag: v1.3.1
-        commit: 51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf
-        dest: deps/zlib
-      - type: git
-        url: https://github.com/glennrp/libpng
-        tag: v1.6.47
-        commit: 872555f4ba910252783af1507f9e7fe1653be252
-        dest: deps/libpng
+      # - type: git
+      #   url: https://github.com/madler/zlib
+      #   tag: v1.3.1
+      #   commit: 51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf
+      #   dest: deps/zlib
+      # - type: git
+      #   url: https://github.com/glennrp/libpng
+      #   tag: v1.6.47
+      #   commit: 872555f4ba910252783af1507f9e7fe1653be252
+      #   dest: deps/libpng
       - type: git
         url: https://github.com/mariusbancila/stduuid
         tag: 3afe7193facd5d674de709fccc44d5055e144d7a
