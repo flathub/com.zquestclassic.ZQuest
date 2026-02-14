@@ -19,23 +19,6 @@ cleanup:
   - /bin/*png*
 
 modules:
-  - name: libdumb
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -D CMAKE_C_COMPILER=clang
-      - -D CMAKE_CXX_COMPILER=clang++
-      - -D CMAKE_POSITION_INDEPENDENT_CODE=ON
-      - -D BUILD_EXAMPLES=OFF
-      - -D BUILD_ALLEGRO4=OFF
-    build-options:
-      append-path: /usr/lib/sdk/llvm17/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm17/lib
-    sources:
-      - type: git
-        url: https://github.com/kode54/dumb
-        tag: 396caa4d31859045ccb5ef943fd430ca4026cce8
-
   - name: zquest
     buildsystem: cmake
     builddir: true
@@ -46,8 +29,8 @@ modules:
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
-      # - -D ZC_VERSION=2.55.10
-      - -D RELEASE_TAG=2.55.10
+      # - -D ZC_VERSION=2.55.12
+      - -D RELEASE_TAG=2.55.12
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
@@ -57,19 +40,20 @@ modules:
       - -D FETCHCONTENT_SOURCE_DIR_ASMJIT=../deps/asmjit
       - -D FETCHCONTENT_SOURCE_DIR_NATIVEFILEDIALOG=../deps/nfd
       - -D FETCHCONTENT_SOURCE_DIR_JSON=../deps/json
-      - -D FETCHCONTENT_SOURCE_DIR_ZLIB=../deps/zlib
-      - -D FETCHCONTENT_SOURCE_DIR_PNG=../deps/libpng
       - -D FETCHCONTENT_SOURCE_DIR_STDUUID=../deps/stduuid
+      - -D WANT_VENDORED_ZLIB=OFF
+      # TODO: for some reason `find_package(PNG REQUIRED)` is not producing PNG::PNG target.
+      # - -D WANT_VENDORED_LIBPNG=OFF
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 94da6b94725a10f0f768681fb3e9097abb03fc5b
-        tag: 2.55.10
+        commit: 4c43d2db35a5c6b8b37ae1811ba8b766a23c8c12
+        tag: 2.55.12
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
         url: https://github.com/connorjclark/allegro5
-        tag: 97c84670907b2547f742924d571f2c617d557ed0
+        tag: 3d5eda1aa2be689a057b99d1050c425ec40ea57e
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
@@ -89,18 +73,8 @@ modules:
         dest: deps/asmjit
       - type: git
         url: https://github.com/btzy/nativefiledialog-extended
-        tag: 17b6e8ce219c0677f94b63636abb9296b28841ca
+        tag: 660493307dd6a8d7fe5fa77cb1c23cbb18ff17c3
         dest: deps/nfd
-      - type: git
-        url: https://github.com/madler/zlib
-        tag: v1.3.1
-        commit: 51b7f2abdade71cd9bb0e7a373ef2610ec6f9daf
-        dest: deps/zlib
-      - type: git
-        url: https://github.com/glennrp/libpng
-        tag: v1.6.47
-        commit: 872555f4ba910252783af1507f9e7fe1653be252
-        dest: deps/libpng
       - type: git
         url: https://github.com/mariusbancila/stduuid
         tag: 3afe7193facd5d674de709fccc44d5055e144d7a
@@ -184,7 +158,7 @@ modules:
               echo "-----------------------"
               # export LIBGL_ALWAYS_SOFTWARE=1
             fi
-            zlauncher
+            ZC_DISABLE_CHDIR=1 zlauncher
       - type: file
         path: com.zquestclassic.ZQuest.metainfo.xml
       - type: file
