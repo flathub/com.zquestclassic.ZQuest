@@ -123,25 +123,8 @@ modules:
               fi
             done
 
-            python <<EOF
-
-            from pathlib import Path
-            import distutils
-
-            app_dir = Path('/app')
-            data_dir = Path('$DATA_DIR')
-
-            for path in app_dir.rglob('*'):
-              if '/app/bin' in str(path) or path.name == '.ref' or not path.is_file():
-                continue
-
-              dest = data_dir / path.relative_to(app_dir)
-              dest.parent.mkdir(parents=True, exist_ok=True)
-              dest, copied = distutils.file_util.copy_file(path, dest, update=1)
-              if copied:
-                print(f'copied: {dest}')
-
-            EOF
+            # Recursively copy all contents of the app resources dir to the user's data dir.
+            cp -rup "/app/share/zquestclassic/"* "$DATA_DIR/"
 
           # nvidia cards are not working within flatpak, at least for me
           # on Linux Mint 21.3. So set LIBGL_ALWAYS_SOFTWARE to workaround.
