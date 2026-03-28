@@ -29,8 +29,8 @@ modules:
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
-      # - -D ZC_VERSION=2.55.12
-      - -D RELEASE_TAG=2.55.12
+      # - -D ZC_VERSION=2.55.13
+      - -D RELEASE_TAG=2.55.13
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
@@ -47,8 +47,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 4c43d2db35a5c6b8b37ae1811ba8b766a23c8c12
-        tag: 2.55.12
+        commit: 5feb08b0f8ca51c5329522fb9ba531ab349b5677
+        tag: 2.55.13
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
