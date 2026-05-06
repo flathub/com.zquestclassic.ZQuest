@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <id>com.zquestclassic.ZQuest.desktop</id>
+<component type="desktop-application">
+  <id>com.zquestclassic.ZQuest</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>ZQuest Classic</name>
   <summary>A game engine for creating games similar to the popular classic adventure game</summary>
   <description>
-    <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines, due to the number of features that are available without the need for any form of programming knowledge.</p>
+    <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into
+      a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines,
+      due to the number of features that are available without the need for any form of programming knowledge.</p>
   </description>
   <launchable type="desktop-id">com.zquestclassic.ZQuest.desktop</launchable>
   <developer id="com.zquestclassic">
@@ -15,8 +17,11 @@
 
   <url type="homepage">https://zquestclassic.com</url>
   <url type="bugtracker">https://github.com/ZQuestClassic/ZQuestClassic/issues</url>
+  <url type="vcs-browser">https://github.com/ZQuestClassic/ZQuestClassic</url>
   <url type="donation">https://www.patreon.com/zquestdevs</url>
-
+  <provides>
+    <id>com.zquestclassic.ZQuest.desktop</id>
+  </provides>
   <categories>
 		<category>Game</category>
 	</categories>

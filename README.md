@@ -6,12 +6,18 @@ To use this flatpak, visit the [Flathub page](https://flathub.org/apps/com.zques
 
 Prevent git lfs from downloading huge test files
 
-> sudo git config --system "includeIf.gitdir:flatpak-builder/git/https_github.com_ZQuestClassic_ZQuestClassic.path" "$PWD/gitconfig.inc"
+```bash
+sudo git config --system "includeIf.gitdir:flatpak-builder/git/https_github.com_ZQuestClassic_ZQuestClassic.path" "$PWD/gitconfig.inc"
+```
 
 Build:
 
-> flatpak-builder build com.zquestclassic.ZQuest.yml --force-clean --user --install
+```bash
+flatpak-builder build com.zquestclassic.ZQuest.yml --force-clean --user --install
+```
 
 Then to run:
 
-> flatpak run com.zquestclassic.ZQuest
+```bash
+flatpak run com.zquestclassic.ZQuest
+```
