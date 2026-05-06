@@ -44,6 +44,7 @@ modules:
       - -D WANT_VENDORED_ZLIB=OFF
       # TODO: for some reason `find_package(PNG REQUIRED)` is not producing PNG::PNG target.
       # - -D WANT_VENDORED_LIBPNG=OFF
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
