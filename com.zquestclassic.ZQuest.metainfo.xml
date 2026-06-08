@@ -24,6 +24,9 @@
     <content_attribute id="violence-cartoon">mild</content_attribute>
   </content_rating>
   <releases>
+    <release version="2.55.14" date="2026-05-01">
+      <url>https://zquestclassic.com/releases/2.55.14/</url>
+    </release>
     <release version="2.55.13" date="2026-03-21">
       <url>https://zquestclassic.com/releases/2.55.13/</url>
     </release>
