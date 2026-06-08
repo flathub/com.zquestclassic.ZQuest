@@ -1,9 +1,9 @@
 app-id: com.zquestclassic.ZQuest
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm17
+  - org.freedesktop.Sdk.Extension.llvm21
 finish-args:
   - --share=network
   - --share=ipc
@@ -23,9 +23,12 @@ modules:
     buildsystem: cmake
     builddir: true
     build-options:
-      append-path: /usr/lib/sdk/llvm17/bin
-      prepend-ld-library-path: /usr/lib/sdk/llvm17/lib
+      append-path: /usr/lib/sdk/llvm21/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm21/lib
+      # Fixes build errors w/ clang21 + fmt
+      cxxflags: "-DFMT_CONSTEVAL="
     config-opts:
+      - -D CMAKE_POLICY_VERSION_MINIMUM=3.5
       - -D CMAKE_C_COMPILER=clang
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
