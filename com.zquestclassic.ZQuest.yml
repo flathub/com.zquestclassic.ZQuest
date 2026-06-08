@@ -33,7 +33,7 @@ modules:
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
       # - -D ZC_VERSION=2.55.13
-      - -D RELEASE_TAG=2.55.13
+      - -D RELEASE_TAG=2.55.14
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
@@ -44,19 +44,20 @@ modules:
       - -D FETCHCONTENT_SOURCE_DIR_NATIVEFILEDIALOG=../deps/nfd
       - -D FETCHCONTENT_SOURCE_DIR_JSON=../deps/json
       - -D FETCHCONTENT_SOURCE_DIR_STDUUID=../deps/stduuid
+      - -D FETCHCONTENT_SOURCE_DIR_MINIZ=../deps/miniz
       - -D WANT_VENDORED_ZLIB=OFF
       # TODO: for some reason `find_package(PNG REQUIRED)` is not producing PNG::PNG target.
       # - -D WANT_VENDORED_LIBPNG=OFF
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 5feb08b0f8ca51c5329522fb9ba531ab349b5677
-        tag: 2.55.13
+        commit: 983d539c1329847fb7f746848d4901500d835fbc
+        tag: 2.55.14
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
         url: https://github.com/connorjclark/allegro5
-        tag: 3d5eda1aa2be689a057b99d1050c425ec40ea57e
+        tag: 7fe12cad20d57e79273af0e51dbda897d60d8dfd
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
@@ -82,6 +83,10 @@ modules:
         url: https://github.com/mariusbancila/stduuid
         tag: 3afe7193facd5d674de709fccc44d5055e144d7a
         dest: deps/stduuid
+      - type: git
+        url: https://github.com/richgel999/miniz
+        tag: 9ae305f6e109f8f1fbd2130458f1ee6197269b3b
+        dest: deps/miniz
       - type: shell
         commands:
           - cd deps/stduuid && git apply ../../third_party/stduuid.patch
