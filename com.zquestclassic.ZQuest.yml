@@ -33,9 +33,10 @@ modules:
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
       # - -D ZC_VERSION=2.55.13
-      - -D RELEASE_TAG=2.55.14
+      - -D RELEASE_TAG=2.55.17
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
+      - -D FETCHCONTENT_SOURCE_DIR_SDL2=../deps/sdl2
       - -D FETCHCONTENT_SOURCE_DIR_ALLEGRO5=../deps/allegro5
       - -D FETCHCONTENT_SOURCE_DIR_GME_EXTERNAL=../deps/gme
       # - -D FETCHCONTENT_SOURCE_DIR_ASIO=../deps/asio
@@ -51,13 +52,18 @@ modules:
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 983d539c1329847fb7f746848d4901500d835fbc
-        tag: 2.55.14
+        commit: 4ef771c64666812a1359b8f34fe4d7803868ba13
+        tag: 2.55.17
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
+        url: https://github.com/libsdl-org/SDL
+        commit: 5d249570393f7a37e037abf22cd6012a4cc56a71
+        tag: release-2.32.10
+        dest: deps/sdl2
+      - type: git
         url: https://github.com/connorjclark/allegro5
-        tag: 7fe12cad20d57e79273af0e51dbda897d60d8dfd
+        tag: 9780b84a313d459baaf79f7cc493f6f975ac50f9
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
@@ -90,6 +96,8 @@ modules:
       - type: shell
         commands:
           - cd deps/stduuid && git apply ../../third_party/stduuid.patch
+          - cd deps/gme && git apply ../../third_party/gme.patch
+          - cd deps/sdl2 && git apply ../../third_party/sdl2.patch
       - type: archive
         url: https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz
         sha256: d6c65aca6b1ed68e7a182f4757257b107ae403032760ed6ef121c9d55e81757d
