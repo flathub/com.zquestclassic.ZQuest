@@ -33,7 +33,7 @@ modules:
       - -D CMAKE_CXX_COMPILER=clang++
       # - -D ZC_OFFICIAL=1
       # - -D ZC_VERSION=2.55.13
-      - -D RELEASE_TAG=2.55.17
+      - -D RELEASE_TAG=2.55.18
       - -D RELEASE_CHANNEL=2.55
       - -D REPO=ZQuestClassic/ZQuestClassic
       - -D FETCHCONTENT_SOURCE_DIR_SDL2=../deps/sdl2
@@ -52,8 +52,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ZQuestClassic/ZQuestClassic
-        commit: 4ef771c64666812a1359b8f34fe4d7803868ba13
-        tag: 2.55.17
+        commit: a040a2b14dc23012234f0abc0e5f225a0921e9d7
+        tag: 2.55.18
         # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
         disable-shallow-clone: true
       - type: git
@@ -67,7 +67,7 @@ modules:
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
-        tag: 05a2aa29e8eae29316804fdd28ceaa96c74a1531
+        tag: 8238afd9503a59ffcec0e2685584d5ce819ad7c6
         dest: deps/gme
       # - type: git
       #   url: https://github.com/chriskohlhoff/asio
