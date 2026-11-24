@@ -7,8 +7,9 @@ sdk-extensions:
 finish-args:
   - --share=network
   - --share=ipc
-  - --socket=wayland
-  - --socket=fallback-x11
+  # Allegro only has an X11 backend (no native Wayland), so runs via XWayland.
+  # Do not use wayland + fallback-x11: that hides X11 on Wayland sessions and crashes.
+  - --socket=x11
   - --socket=pulseaudio
   - --filesystem=xdg-download
   - --filesystem=xdg-documents
