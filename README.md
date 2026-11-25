@@ -15,3 +15,10 @@ Build:
 Then to run:
 
 > flatpak run com.zquestclassic.ZQuest
+
+# Updating to a new release
+
+flatpak-external-data-checker opens a PR when a new 2.55.x tag is released. That PR only updates the zquest source, so also:
+
+- Set `RELEASE_TAG` in the manifest to the new version.
+- Update any dependency sources whose pins changed upstream. The "Check dependency pins" workflow (`.github/check_deps.py`) compares the manifest against upstream's `CMakeLists.txt` and lists what is out of date. Run it locally with `python3 .github/check_deps.py`.

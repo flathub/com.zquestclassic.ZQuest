@@ -55,6 +55,13 @@ modules:
         url: https://github.com/ZQuestClassic/ZQuestClassic
         commit: a040a2b14dc23012234f0abc0e5f225a0921e9d7
         tag: 2.55.18
+        # flatpak-external-data-checker opens a PR for new 2.55.x releases.
+        # It does not update RELEASE_TAG or the dependency sources, so the
+        # check-deps workflow lists what else needs changing.
+        x-checker-data:
+          type: git
+          tag-pattern: ^(2\.55\.[0-9]+)$
+          is-main-source: true
       - type: git
         url: https://github.com/libsdl-org/SDL
         commit: 5d249570393f7a37e037abf22cd6012a4cc56a71
