@@ -5,6 +5,7 @@ Comment=Play ZQuest Classic quests
 Icon=com.zquestclassic.ZQuest.Player
 Categories=Game;AdventureGame;
 Exec=entry.sh zplayer %f
+StartupWMClass=zplayer
 MimeType=application/x-zquestclassic-quest;
 InitialPreference=10
 Terminal=false
