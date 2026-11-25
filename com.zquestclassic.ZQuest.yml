@@ -110,11 +110,21 @@ modules:
       - |
         set -ex
         install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.desktop
+        install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.Player.desktop
+        install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.Editor.desktop
         install -Dm 644 -t /app/share/metainfo com.zquestclassic.ZQuest.metainfo.xml
+        install -Dm 644 -t /app/share/mime/packages com.zquestclassic.ZQuest.xml
 
         for s in {16,32,64,128,192,256,512}; do
           install -p -Dm644 com.zquestclassic.ZQuest-$s.png /app/share/icons/hicolor/${s}x${s}/apps/com.zquestclassic.ZQuest.png
           rm com.zquestclassic.ZQuest-$s.png
+        done
+
+        for app in Player Editor; do
+          for s in {16,32,48,128,256}; do
+            install -p -Dm644 com.zquestclassic.ZQuest.$app-$s.png /app/share/icons/hicolor/${s}x${s}/apps/com.zquestclassic.ZQuest.$app.png
+            rm com.zquestclassic.ZQuest.$app-$s.png
+          done
         done
 
         mv entry.sh /app/bin
@@ -123,10 +133,36 @@ modules:
       - type: script
         dest-filename: entry.sh
         commands:
-          # Copy all app resources to user's data directory, symlink the bin folder,
-          # and execute the launcher from there.
+          # Usage: entry.sh [zlauncher|zplayer|zeditor] [args...]
+          # Runs the launcher by default. Remaining args are passed to the program.
           - |
             set -e
+            PROGRAM=zlauncher
+            case "$1" in
+              zlauncher|zplayer|zeditor) PROGRAM="$1"; shift ;;
+            esac
+
+            # Make relative file paths absolute, since we cd to the data dir below.
+            for arg do
+              shift
+              case "$arg" in
+                -*|/*) ;;
+                *) if [ -e "$arg" ]; then arg="$PWD/$arg"; fi ;;
+              esac
+              set -- "$@" "$arg"
+            done
+
+            # Opening a quest file in the player (e.g. double-clicking a .qst)
+            # plays it in standalone mode.
+            if [ "$PROGRAM" = zplayer ] && [ $# -eq 1 ]; then
+              case "$1" in
+                *.qst) set -- -standalone "$1" ;;
+              esac
+            fi
+
+          # Copy all app resources to user's data directory, and execute
+          # the program from there.
+          - |
             DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/ZQuest Classic"
             mkdir -p "$DATA_DIR"
             echo "Using data directory: $DATA_DIR"
@@ -158,11 +194,17 @@ modules:
               echo "-----------------------"
               # export LIBGL_ALWAYS_SOFTWARE=1
             fi
-            ZC_DISABLE_CHDIR=1 zlauncher
+            ZC_DISABLE_CHDIR=1 exec "$PROGRAM" "$@"
       - type: file
         path: com.zquestclassic.ZQuest.metainfo.xml
       - type: file
         path: com.zquestclassic.ZQuest.desktop
+      - type: file
+        path: com.zquestclassic.ZQuest.Player.desktop
+      - type: file
+        path: com.zquestclassic.ZQuest.Editor.desktop
+      - type: file
+        path: com.zquestclassic.ZQuest.xml
       - type: file
         path: icons/com.zquestclassic.ZQuest-16.png
       - type: file
@@ -177,3 +219,23 @@ modules:
         path: icons/com.zquestclassic.ZQuest-256.png
       - type: file
         path: icons/com.zquestclassic.ZQuest-512.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Player-16.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Player-32.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Player-48.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Player-128.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Player-256.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Editor-16.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Editor-32.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Editor-48.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Editor-128.png
+      - type: file
+        path: icons/com.zquestclassic.ZQuest.Editor-256.png

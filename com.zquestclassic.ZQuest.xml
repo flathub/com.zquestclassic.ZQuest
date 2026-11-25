@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-zquestclassic-quest">
+    <comment>ZQuest Classic quest</comment>
+    <icon name="com.zquestclassic.ZQuest.Player"/>
+    <glob pattern="*.qst"/>
+  </mime-type>
+</mime-info>
