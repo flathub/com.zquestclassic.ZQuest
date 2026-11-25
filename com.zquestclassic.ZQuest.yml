@@ -55,8 +55,6 @@ modules:
         url: https://github.com/ZQuestClassic/ZQuestClassic
         commit: a040a2b14dc23012234f0abc0e5f225a0921e9d7
         tag: 2.55.18
-        # TODO: can remove when changelog for latest version is not generated at release time (which needs commit history)
-        disable-shallow-clone: true
       - type: git
         url: https://github.com/libsdl-org/SDL
         commit: 5d249570393f7a37e037abf22cd6012a4cc56a71
