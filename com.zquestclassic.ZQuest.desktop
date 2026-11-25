@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=ZQuest Classic
-Comment=ZQuest Classic is a game engine for creating games similar to the popular classic adventure game.
+Name=ZQuest Classic Launcher
+Comment=Open the ZQuest Classic player or editor, and change settings
 Icon=com.zquestclassic.ZQuest
 Categories=Game;AdventureGame;
 TryExec=zlauncher
