@@ -2,7 +2,9 @@
 Type=Application
 Name=ZQuest Classic Editor
 Comment=Create and edit ZQuest Classic quests
-Icon=com.zquestclassic.ZQuest.Editor
+Icon=com.zquestclassic.ZQuest.ZEditor
 Categories=Game;AdventureGame;
 Exec=entry.sh zeditor %f
+MimeType=application/x-zquestclassic-quest;
+InitialPreference=1
 Terminal=false
