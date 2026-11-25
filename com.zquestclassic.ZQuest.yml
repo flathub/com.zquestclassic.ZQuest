@@ -160,7 +160,7 @@ modules:
             # plays it in standalone mode.
             if [ "$PROGRAM" = zplayer ] && [ $# -eq 1 ]; then
               case "$1" in
-                *.qst) set -- -standalone "$1" ;;
+                *.[qQ][sS][tT]) set -- -standalone "$1" ;;
               esac
             fi
 
