@@ -115,7 +115,7 @@ modules:
         set -ex
         install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.desktop
         install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.Player.desktop
-        install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.Editor.desktop
+        install -Dm 644 -t /app/share/applications com.zquestclassic.ZQuest.ZEditor.desktop
         install -Dm 644 -t /app/share/metainfo com.zquestclassic.ZQuest.metainfo.xml
         install -Dm 644 -t /app/share/mime/packages com.zquestclassic.ZQuest.xml
 
@@ -124,7 +124,7 @@ modules:
           rm com.zquestclassic.ZQuest-$s.png
         done
 
-        for app in Player Editor; do
+        for app in Player ZEditor; do
           for s in {16,32,48,128,256}; do
             install -p -Dm644 com.zquestclassic.ZQuest.$app-$s.png /app/share/icons/hicolor/${s}x${s}/apps/com.zquestclassic.ZQuest.$app.png
             rm com.zquestclassic.ZQuest.$app-$s.png
@@ -206,7 +206,7 @@ modules:
       - type: file
         path: com.zquestclassic.ZQuest.Player.desktop
       - type: file
-        path: com.zquestclassic.ZQuest.Editor.desktop
+        path: com.zquestclassic.ZQuest.ZEditor.desktop
       - type: file
         path: com.zquestclassic.ZQuest.xml
       - type: file
@@ -234,12 +234,12 @@ modules:
       - type: file
         path: icons/com.zquestclassic.ZQuest.Player-256.png
       - type: file
-        path: icons/com.zquestclassic.ZQuest.Editor-16.png
+        path: icons/com.zquestclassic.ZQuest.ZEditor-16.png
       - type: file
-        path: icons/com.zquestclassic.ZQuest.Editor-32.png
+        path: icons/com.zquestclassic.ZQuest.ZEditor-32.png
       - type: file
-        path: icons/com.zquestclassic.ZQuest.Editor-48.png
+        path: icons/com.zquestclassic.ZQuest.ZEditor-48.png
       - type: file
-        path: icons/com.zquestclassic.ZQuest.Editor-128.png
+        path: icons/com.zquestclassic.ZQuest.ZEditor-128.png
       - type: file
-        path: icons/com.zquestclassic.ZQuest.Editor-256.png
+        path: icons/com.zquestclassic.ZQuest.ZEditor-256.png

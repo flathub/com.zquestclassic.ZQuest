@@ -6,4 +6,5 @@ Icon=com.zquestclassic.ZQuest.Player
 Categories=Game;AdventureGame;
 Exec=entry.sh zplayer %f
 MimeType=application/x-zquestclassic-quest;
+InitialPreference=10
 Terminal=false
