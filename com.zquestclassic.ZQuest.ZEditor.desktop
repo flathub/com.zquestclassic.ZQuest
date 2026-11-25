@@ -5,6 +5,7 @@ Comment=Create and edit ZQuest Classic quests
 Icon=com.zquestclassic.ZQuest.ZEditor
 Categories=Game;AdventureGame;
 Exec=entry.sh zeditor %f
+StartupWMClass=zeditor
 MimeType=application/x-zquestclassic-quest;
 InitialPreference=1
 Terminal=false
