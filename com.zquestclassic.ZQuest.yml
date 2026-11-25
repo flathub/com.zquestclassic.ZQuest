@@ -64,11 +64,11 @@ modules:
         dest: deps/sdl2
       - type: git
         url: https://github.com/connorjclark/allegro5
-        tag: 9780b84a313d459baaf79f7cc493f6f975ac50f9
+        commit: 9780b84a313d459baaf79f7cc493f6f975ac50f9
         dest: deps/allegro5
       - type: git
         url: https://github.com/libgme/game-music-emu
-        tag: 8238afd9503a59ffcec0e2685584d5ce819ad7c6
+        commit: 8238afd9503a59ffcec0e2685584d5ce819ad7c6
         dest: deps/gme
       # - type: git
       #   url: https://github.com/chriskohlhoff/asio
@@ -80,19 +80,19 @@ modules:
       #   dest: deps/websocketpp
       - type: git
         url: https://github.com/connorjclark/asmjit
-        tag: 6d153ad8e13984841c2c642c0fa11e60f41e54dc
+        commit: 6d153ad8e13984841c2c642c0fa11e60f41e54dc
         dest: deps/asmjit
       - type: git
         url: https://github.com/btzy/nativefiledialog-extended
-        tag: 660493307dd6a8d7fe5fa77cb1c23cbb18ff17c3
+        commit: 660493307dd6a8d7fe5fa77cb1c23cbb18ff17c3
         dest: deps/nfd
       - type: git
         url: https://github.com/mariusbancila/stduuid
-        tag: 3afe7193facd5d674de709fccc44d5055e144d7a
+        commit: 3afe7193facd5d674de709fccc44d5055e144d7a
         dest: deps/stduuid
       - type: git
         url: https://github.com/richgel999/miniz
-        tag: 9ae305f6e109f8f1fbd2130458f1ee6197269b3b
+        commit: 9ae305f6e109f8f1fbd2130458f1ee6197269b3b
         dest: deps/miniz
       - type: shell
         commands:
