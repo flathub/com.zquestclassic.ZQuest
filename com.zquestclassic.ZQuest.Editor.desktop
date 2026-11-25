@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ZQuest Classic Editor
+Comment=Create and edit ZQuest Classic quests
+Icon=com.zquestclassic.ZQuest.Editor
+Categories=Game;AdventureGame;
+Exec=entry.sh zeditor %f
+Terminal=false
