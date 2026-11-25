@@ -1,0 +1,27 @@
+From: Connor Clark
+Subject: [PATCH] fix(zc): use the quest given on the command line for standalone saves
+
+In standalone mode, an existing save file kept using the quest path it
+recorded when it was created, ignoring the quest given on the command
+line. Under Flatpak, a quest opened from outside the sandbox's folders
+gets a document portal path, so its save stayed tied to that path even
+after access to the quest's real folder was granted, and enhanced music
+next to the quest never loaded.
+
+Backport for 2.55.18; remove when updating to a release with the fix.
+---
+--- a/src/zc/zelda.cpp
++++ b/src/zc/zelda.cpp
+@@ -1418,6 +1418,12 @@
+ 	chop_path(qstpath);
+ 	int32_t ret = 0;
+ 	int32_t qst_num = g->get_quest();
++
++	// In standalone mode, play the quest given on the command line, even if the save
++	// file recorded a different path for it (the quest was moved, or a sandbox like
++	// Flatpak handed it over from a different location last time).
++	if (standalone_mode && !standalone_quest.empty())
++		g->header.qstpath = standalone_quest.string();
+ 
+ 	if (g->header.qstpath.empty() && !qst_num)
+ 	{
