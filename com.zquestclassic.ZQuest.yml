@@ -171,15 +171,6 @@ modules:
             mkdir -p "$DATA_DIR"
             echo "Using data directory: $DATA_DIR"
 
-            # Remove old symlinks from previous implementation.
-            find "$DATA_DIR" -maxdepth 1 -type l -not -path "$DATA_DIR/bin" | while read f; do
-              echo readlink "$f"
-              if readlink "$f" | grep -q /app; then
-                mkdir -p "$DATA_DIR/old_links_can_delete_folder"
-                mv "$f" "$DATA_DIR/old_links_can_delete_folder"
-              fi
-            done
-
             # Recursively copy all contents of the app resources dir to the user's data dir.
             cp -rup "/app/share/zquestclassic/"* "$DATA_DIR/"
 
