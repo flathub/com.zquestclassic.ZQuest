@@ -1,61 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <id>com.zquestclassic.ZQuest.desktop</id>
+<component type="desktop-application">
+  <id>com.zquestclassic.ZQuest</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>ZQuest Classic</name>
-  <summary>A game engine for creating games similar to the popular classic adventure game</summary>
+  <summary>Make and play adventure games</summary>
   <description>
-    <p>ZQuest Classic started as a classic 80s-style dungeon-crawler game engine, that over time has grown into a more modern engine. It allows much easier creation of dungeon-crawler style games than other big game engines, due to the number of features that are available without the need for any form of programming knowledge.</p>
+    <p>ZQuest Classic is an engine for making and playing top-down adventure games in the style of 80s and 90s classics. It started as a dungeon crawler engine and has grown into a modern one, with most of its features available without any programming.</p>
+    <p>The included player runs quests made by the community, and the editor lets you build your own, with maps, dungeons, enemies, items and music. For more advanced games, the ZScript language adds full scripting support.</p>
+    <p>Open the launcher to choose the player or the editor, or open a quest file to start playing it right away.</p>
   </description>
   <launchable type="desktop-id">com.zquestclassic.ZQuest.desktop</launchable>
+  <provides>
+    <id>com.zquestclassic.ZQuest.desktop</id>
+  </provides>
+  <replaces>
+    <id>com.zquestclassic.ZQuest.desktop</id>
+  </replaces>
   <developer id="com.zquestclassic">
     <name>ZQuest Classic</name>
   </developer>
 
   <url type="homepage">https://zquestclassic.com</url>
   <url type="bugtracker">https://github.com/ZQuestClassic/ZQuestClassic/issues</url>
+  <url type="vcs-browser">https://github.com/ZQuestClassic/ZQuestClassic</url>
   <url type="donation">https://www.patreon.com/zquestdevs</url>
 
-  <categories>
-		<category>Game</category>
-	</categories>
+  <branding>
+    <color type="primary" scheme_preference="light">#8c6fd6</color>
+    <color type="primary" scheme_preference="dark">#3d2c6e</color>
+  </branding>
+
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <supports>
+    <control>gamepad</control>
+  </supports>
+  <requires>
+    <display_length compare="ge">768</display_length>
+  </requires>
+
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">mild</content_attribute>
   </content_rating>
   <releases>
-    <release version="2.55.18" date="2026-11-20">
-      <url>https://zquestclassic.com/releases/2.55.18/</url>
+    <release version="2.55.18" date="2026-11-19">
+      <url type="details">https://zquestclassic.com/releases/2.55.18/</url>
+      <description>
+        <p>Fixes a crash on startup on Linux systems without a MIDI sequencer, and a crash when closing the player, editor or launcher. Damaged or unusual quest, save and music files no longer cause crashes or memory errors. Combo triggers also gain a "Once Per Weapon" option.</p>
+      </description>
     </release>
     <release version="2.55.17" date="2026-09-27">
-      <url>https://zquestclassic.com/releases/2.55.17/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.17/</url>
+      <description>
+        <p>Much better controller support: hundreds more controllers are recognized, and each controller gets its own control scheme with sensible defaults. Save files can be moved between computers, and the editor starts with a new quest browser. Also includes many gameplay, music and scripting fixes.</p>
+      </description>
     </release>
     <release version="2.55.14" date="2026-05-01">
-      <url>https://zquestclassic.com/releases/2.55.14/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.14/</url>
+      <description>
+        <p>Improves name entry, quest auto-backups and timed auto-saves, and adds a report of which DMaps belong to each level to the editor. Fixes crashes with music files that have non-ASCII names and with very large lists, plus many gameplay bugs with combos, triggers and older quests.</p>
+      </description>
     </release>
     <release version="2.55.13" date="2026-03-21">
-      <url>https://zquestclassic.com/releases/2.55.13/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.13/</url>
+      <description>
+        <p>Fixes many bugs with combo triggers, bombs and enemies, and finds music files regardless of upper or lower case in their names. Replays load about 20 times faster, and the editor now looks for script includes in the quest's scripts folder.</p>
+      </description>
     </release>
     <release version="2.55.12" date="2026-01-18">
-      <url>https://zquestclassic.com/releases/2.55.12/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.12/</url>
+      <description>
+        <p>Adds multiple control schemes, and an editor map view that zooms and pans with the mouse. Sound now works on many more Linux distributions thanks to PulseAudio support. Also fixes many gameplay bugs and slowdowns in the editor.</p>
+      </description>
     </release>
-	  <release version="2.55.10" date="2025-07-17">
-      <url>https://zquestclassic.com/releases/2.55.10/</url>
+    <release version="2.55.10" date="2025-07-17">
+      <url type="details">https://zquestclassic.com/releases/2.55.10/</url>
+      <description>
+        <p>Fixes many gameplay bugs, including crashes, several softlocks, and problems with lifted and thrown weapons. Scripts gain new helper functions for working with flags.</p>
+      </description>
     </release>
     <release version="2.55.9" date="2025-03-16">
-      <url>https://zquestclassic.com/releases/2.55.9/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.9/</url>
+      <description>
+        <p>Shows the bottom 8 pixels of the screen, and adds Reference Tiles to the editor. Fixes crashes when loading some MIDI files, save files from 3.0, and when too many sprites are on screen, and adds many new scripting features.</p>
+      </description>
     </release>
     <release version="2.55.8" date="2025-01-04">
-      <url>https://zquestclassic.com/releases/2.55.8/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.8/</url>
+      <description>
+        <p>Adds the Cambria tileset as an option for new quests, along with new trigger and subscreen options. Fixes crashes with door combo sets and when importing combo aliases, and many smaller gameplay and editor bugs.</p>
+      </description>
     </release>
     <release version="2.55.6" date="2024-09-08">
-      <url>https://zquestclassic.com/releases/2.55.6/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.6/</url>
+      <description>
+        <p>Tracker music (MOD, IT, S3M and XM) now supports loop points and no longer plays silence before looping, and keyboard input has lower latency. Copy, paste and select all work again in text fields, and several crashes in the player and editor are fixed.</p>
+      </description>
     </release>
-    <release version="2.55.4" date="2024-06-26"/>
-    <release version="2.55.3" date="2024-05-16"/>
-    <release version="2.55.2" date="2024-04-22"/>
+    <release version="2.55.4" date="2024-06-26">
+      <url type="details">https://zquestclassic.com/releases/2.55.4/</url>
+      <description>
+        <p>Adds a Note item wizard and an option to use the system's own file dialogs. Fixes enemy scripts that stopped running after one frame, and reduces CPU usage.</p>
+      </description>
+    </release>
+    <release version="2.55.3" date="2024-05-16">
+      <url type="details">https://zquestclassic.com/releases/2.55.3/</url>
+      <description>
+        <p>Fixes the version shown for 2.55 releases, the editor's Used Tiles report, and several scripting bugs. The ZScript Debugger is renamed to ZC Console.</p>
+      </description>
+    </release>
+    <release version="2.55.2" date="2024-04-22">
+      <url type="details">https://zquestclassic.com/releases/2.55.2/</url>
+      <description>
+        <p>Adds per-screen notes and previews of large FFCs to the editor. Fixes two editor crashes and many scripting bugs.</p>
+      </description>
+    </release>
     <release version="2.55.0" date="2024-02-20">
-      <url>https://zquestclassic.com/releases/2.55.0/</url>
+      <url type="details">https://zquestclassic.com/releases/2.55.0/</url>
+      <description>
+        <p>The first stable 2.55 release. The editor gains a hotkey cheat sheet, warnings in the combo editor and a shield item wizard, and the player can show the play time in the corner of the screen.</p>
+      </description>
     </release>
   </releases>
   <screenshots>
@@ -63,15 +130,15 @@
       <image>https://zquestclassic.com/img/editor.png</image>
       <caption>Editor screenshot (Cambria tileset by Shane and Matthew)</caption>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://zquestclassic.com/img/sotw-785-joel.png</image>
       <caption>Game screenshot (designed by Joel for SotW 785)</caption>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://zquestclassic.com/img/sotw-778-twilight-knight.png</image>
       <caption>Game screenshot (designed by Twilight Knight for SotW 778)</caption>
     </screenshot>
-    <screenshot type="default">
+    <screenshot>
       <image>https://zquestclassic.com/img/sotw-793-architect-abdiel.png</image>
       <caption>Game screenshot (designed by Architect Abdiel for SotW 793)</caption>
     </screenshot>
