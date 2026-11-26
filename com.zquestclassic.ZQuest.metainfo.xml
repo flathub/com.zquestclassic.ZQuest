@@ -157,7 +157,7 @@
     <release version="2.55.0" date="2024-02-20">
       <url type="details">https://zquestclassic.com/releases/2.55.0/</url>
       <description>
-        <p>The first stable 2.55 release. The editor gains a hotkey cheat sheet, warnings in the combo editor and a shield item wizard, and the player can show the play time in the corner of the screen.</p>
+        <p>The first stable 2.55 release, and the biggest update since 2.50: full Linux and Mac support, a reworked editor with test mode and a new subscreen editor, unlimited save files with replays, generic scripts and a Visual Studio Code extension, and many new item and combo types, real dark rooms, pitfalls and light beam puzzles.</p>
       </description>
     </release>
   </releases>
