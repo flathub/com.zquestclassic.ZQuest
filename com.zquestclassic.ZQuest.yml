@@ -62,6 +62,24 @@ modules:
           type: git
           tag-pattern: ^(2\.55\.[0-9]+)$
           is-main-source: true
+        # The Git LFS files the build needs are fetched as file sources below
+        # instead, because Flathub's reproducibility check rebuilds from the
+        # stored sources, which don't include LFS objects.
+        disable-lfs: true
+      # Git LFS files under resources/, at the same commit as the zquest source.
+      # The sha256 is the LFS object id. check_deps.py verifies this list.
+      - type: file
+        url: https://media.githubusercontent.com/media/ZQuestClassic/ZQuestClassic/a040a2b14dc23012234f0abc0e5f225a0921e9d7/resources/quests/examples/255example.qst
+        sha256: 5a29c4e221bd78eb54b29202c0e173c62a5e048f535ff2cc965139e57a7fd314
+        dest: resources/quests/examples
+      - type: file
+        url: https://media.githubusercontent.com/media/ZQuestClassic/ZQuestClassic/a040a2b14dc23012234f0abc0e5f225a0921e9d7/resources/quests/the_deep.qst
+        sha256: e37f20e41b90586575097214e01b96aa68c4b5c6b7eadfde781157311a640074
+        dest: resources/quests
+      - type: file
+        url: https://media.githubusercontent.com/media/ZQuestClassic/ZQuestClassic/a040a2b14dc23012234f0abc0e5f225a0921e9d7/resources/tilesets/cambria.qst
+        sha256: e8a51ae35496cec128b36ca7492d0e79fa32241645493368188f9b8401151a27
+        dest: resources/tilesets
       - type: git
         url: https://github.com/libsdl-org/SDL
         commit: 5d249570393f7a37e037abf22cd6012a4cc56a71
