@@ -22,3 +22,4 @@ flatpak-external-data-checker opens a PR when a new 2.55.x tag is released. That
 
 - Set `RELEASE_TAG` in the manifest to the new version.
 - Update any dependency sources whose pins changed upstream. The "Check dependency pins" workflow (`.github/check_deps.py`) compares the manifest against upstream's `CMakeLists.txt` and lists what is out of date. Run it locally with `python3 .github/check_deps.py`.
+- Update the file sources for the Git LFS files under `resources/` (the URL's commit, and the `sha256` if the file changed). The same script checks these and prints the entry for any LFS file that is missing.
