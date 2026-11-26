@@ -2,7 +2,7 @@
 <component type="desktop">
   <id>com.zquestclassic.ZQuest.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL-2.0</project_license>
+  <project_license>GPL-3.0-or-later</project_license>
   <name>ZQuest Classic</name>
   <summary>A game engine for creating games similar to the popular classic adventure game</summary>
   <description>
