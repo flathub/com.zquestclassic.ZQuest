@@ -1,0 +1,71 @@
+Include licenses of dependencies with overridden source dirs
+
+package.py only collected licenses from _deps/<name>-src, so dependencies
+built from a local checkout via FETCHCONTENT_SOURCE_DIR_<NAME> (as this
+flatpak does) were left out. Also read those overrides from the CMake cache.
+
+Backport of upstream 0df5a6648a for 2.55.18; remove when updating to a
+release with the fix.
+
+--- a/scripts/package.py
++++ b/scripts/package.py
+@@ -7,6 +7,7 @@
+ import argparse
+ import os
+ import platform
++import re
+ import shutil
+ import subprocess
+ 
+@@ -167,6 +168,28 @@
+     package_dir.mkdir(parents=True, exist_ok=True)
+ 
+ 
++def fetchcontent_source_dir_overrides() -> list[tuple[str, Path]]:
++    # Dependencies built from a local checkout via FETCHCONTENT_SOURCE_DIR_<NAME> (e.g. by
++    # distro packagers) are not in _deps/<name>-src, so find them in the CMake cache.
++    cache_dir = build_dir
++    if not (cache_dir / 'CMakeCache.txt').exists():
++        cache_dir = build_dir.parent
++    cache = cache_dir / 'CMakeCache.txt'
++    if not cache.exists():
++        return []
++
++    overrides = []
++    for line in cache.read_text().splitlines():
++        m = re.match(r'FETCHCONTENT_SOURCE_DIR_(\w+):\w+=(.+)', line)
++        if not m:
++            continue
++        # Relative paths are relative to the build dir CMake was configured in.
++        path = cache_dir / m.group(2).strip()
++        if path.is_dir():
++            overrides.append((m.group(1).lower(), path))
++    return overrides
++
++
+ def collect_licenses(package_dir: Path):
+     output_dir = package_dir / 'licenses'
+     output_dir.mkdir(exist_ok=True, parents=True)
+@@ -180,6 +203,8 @@
+     if not cmake_deps_dir.exists():
+         cmake_deps_dir = build_dir.parent / '_deps'
+     third_party_dirs.extend(cmake_deps_dir.glob('*-src'))
++    third_party_dirs = [(d.name.replace('-src', ''), d) for d in third_party_dirs]
++    third_party_dirs.extend(fetchcontent_source_dir_overrides())
+ 
+     files_to_copy = [
+         'COPYING',
+@@ -193,11 +218,11 @@
+         'README',
+     ]
+ 
+-    for third_party_dir in third_party_dirs:
++    for name, third_party_dir in third_party_dirs:
+         if third_party_dir.is_file():
+             continue
+ 
+-        name = third_party_dir.name.replace('-src', '').replace('_external', '')
++        name = name.replace('_external', '')
+         dir = output_dir / name
+         dir.mkdir(exist_ok=True)
+ 
