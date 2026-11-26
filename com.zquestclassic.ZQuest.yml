@@ -130,6 +130,10 @@ modules:
       # given on the command line. Remove when updating to 2.55.19.
       - type: patch
         path: patches/standalone-quest-path.patch
+      # Backport of the upstream fix for leaving out the licenses of the
+      # dependencies in deps/. Remove when updating to 2.55.19.
+      - type: patch
+        path: patches/package-licenses.patch
 
   - name: files
     buildsystem: simple
@@ -155,6 +159,12 @@ modules:
         done
 
         mv entry.sh /app/bin
+
+        # ZQuest Classic collects the licenses of its bundled libraries into its
+        # data dir. Also put them where Flathub expects licenses. (OSTree stores
+        # identical files once, so the copy takes no extra space.)
+        mkdir -p /app/share/licenses/com.zquestclassic.ZQuest
+        cp -a /app/share/zquestclassic/licenses /app/share/licenses/com.zquestclassic.ZQuest/third_party
 
     sources:
       - type: script
